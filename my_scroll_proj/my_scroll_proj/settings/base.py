@@ -19,8 +19,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ROOT_DIR = os.path.dirname(os.path.dirname (os.path.dirname(os.path.abspath(__file__))))
 
 # # show me the path, master
-# print("BASE_DIR: {0}".format(BASE_DIR))
-# print("ROOT_DIR: {0}".format(ROOT_DIR))
+print("BASE_DIR: {0}".format(BASE_DIR))
+print("ROOT_DIR: {0}".format(ROOT_DIR))
 
 
 # get that dough ...
@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'blog',
 ]
 
 MIDDLEWARE = [
@@ -143,7 +144,7 @@ STATIC_URL = '/static/'
 
 # See: https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
 STATICFILES_DIRS = (
-        ("concoct", os.path.join(ROOT_DIR, "static")),
+        ("my_scroll", os.path.join(ROOT_DIR, "static")),
         )
 
 
