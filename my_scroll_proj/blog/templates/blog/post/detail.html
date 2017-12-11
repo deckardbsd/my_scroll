@@ -3,12 +3,11 @@
 {% block title %} {{ post.title }} {% endblock %}
 
 {% block content %}
-<div class='container-fluid'>
 
-    <h1>{{ post.title }}</h1>
-    <p class="font-italic">Published {{ post.published }} by {{ post.author.get_full_name }}</p>
-    {{ post.body|linebreaks }}
+<h1>{{ post.title }}</h1>
+<p class="font-italic">Published {{ post.published }} by {{ post.author.get_full_name }}</p>
+{{ post.body|linebreaks }}
+<p><a href="{% url "blog:post_share" post.id %}">Share this post</a></p>
 
-</div>
 
 {% endblock %}
