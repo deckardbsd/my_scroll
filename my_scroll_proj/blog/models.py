@@ -34,10 +34,11 @@ class Post(models.Model):
             self.published.strftime('%d'),
             self.slug])
 
+
 class Comment(models.Model):
     post= models.ForeignKey(Post, related_name='comments')
     name = models.CharField(max_length=80)
-    email = models.EmailField()
+    email = models.EmailField(unique=True)
     body = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
