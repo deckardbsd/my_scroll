@@ -2,10 +2,10 @@ from django.views import generic
 from django.shortcuts import get_object_or_404
 from django.views.generic.edit import FormMixin
 from django.views.generic.detail import SingleObjectMixin
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, reverse_lazy
 
 from .models import Post
-from .forms import CommentForm
+from .forms import PostForm, CommentForm
 
 # Create your views here.
 
@@ -17,7 +17,7 @@ class IndexView(generic.ListView):
 
 
 
-class DetailView(FormMixin, generic.DetailView):
+class PostDetailView(FormMixin, generic.DetailView):
     template_name = 'blog/post/detail.html'
     form_class = CommentForm
     model = Post
@@ -27,7 +27,7 @@ class DetailView(FormMixin, generic.DetailView):
         return reverse('blog:post_detail', kwargs={'slug': self.object.slug})
 
     def get_context_data(self, **kwargs):
-        context = super(DetailView, self,).get_context_data(**kwargs)
+        context = super(PostDetailView, self,).get_context_data(**kwargs)
         # It is this
         # post = get_object_or_404(Post, slug=self.kwargs['slug'])
         # OR this 
@@ -52,7 +52,18 @@ class DetailView(FormMixin, generic.DetailView):
         new_comment.post = self.object
         new_comment.save()
 
-        return super(DetailView, self).form_valid(form)
+        return super(PostDetailView, self).form_valid(form)
+
+
+class PostDeleteView(generic.DeleteView):
+    model = Post
+    success_url = reverse_lazy('blog:post_list')
+
+
+class PostUpdateView(generic.UpdateView):
+    template_name = 'blog/post/update.html'
+    model = Post
+    form_class = PostForm
 
 
 ## When you want to have a Form in a DetailView

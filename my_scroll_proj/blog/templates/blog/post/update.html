@@ -1,0 +1,21 @@
+{% extends "blog/base.html" %}
+
+{% block title %} {{ post.title }} {% endblock %}
+
+{% block content %}
+<div class='container-fluid'>
+
+    </h2> Update post: {{ post.title }}</h2>
+
+    <div id="update-post">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <input class="btn btn-info" type="submit" value="Update" >
+        </form>
+    </div>
+
+</div>
+
+{% endblock %}

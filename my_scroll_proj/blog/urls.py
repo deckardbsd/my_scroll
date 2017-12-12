@@ -21,7 +21,9 @@ urlpatterns = [
         url(r'^$', views.IndexView.as_view(), name='post_list'),
         # if you want to use pk to link the model in template
         # url(r'^(?P<pk>[-\w]+)/$', views.DetailView.as_view(), name='post_detail')
-        url(r'^(?P<slug>[-\w]+)/$', views.DetailView.as_view(), name='post_detail')
+        url(r'^(?P<slug>[-\w]+)/$', views.PostDetailView.as_view(), name='post_detail'),
+        url(r'^delete/(?P<slug>[-\w]+)/$', views.PostDeleteView.as_view(), name='post_delete'),
+        url(r'^update/(?P<slug>[-\w]+)/$', views.PostUpdateView.as_view(), name='post_update'),
         # url(r'^(?P<slug>[-\w]+)/$', views.PostView.as_view(), name='post_detail')
 ]
 

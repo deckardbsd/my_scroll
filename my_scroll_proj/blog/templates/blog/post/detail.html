@@ -9,6 +9,24 @@
     <h4 class="font-italic">Published {{ post.published }} by {{ post.author.get_full_name }}</h4>
     {{ post.body|linebreaks }}
 
+    <div class="delete-post">
+        <form action="{% url 'blog:post_delete' post.slug %}" method="post">
+            <input class="btn btn-danger" type="submit" value="Delete" />
+            {% csrf_token %}
+        </form>
+
+        <br />
+    </div>
+
+    <div class="update-post">
+
+        <form action="{% url 'blog:post_update' post.slug %}" method="get">
+            <input class="btn btn-info" type="submit" value="Update" />
+            {% csrf_token %}
+        </form>
+
+    </div>
+
     <hr />
 
     {% with comments.count as total_comments %}
