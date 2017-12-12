@@ -19,7 +19,9 @@ from . import views
 
 urlpatterns = [
         url(r'^$', views.IndexView.as_view(), name='post_list'),
-        url(r'^(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{2})/(?P<post>[-\w]+)/$',
-            views.post_detail, name='post_detail')
+        # if you want to use pk to link the model in template
+        # url(r'^(?P<pk>[-\w]+)/$', views.DetailView.as_view(), name='post_detail')
+        url(r'^(?P<slug>[-\w]+)/$', views.DetailView.as_view(), name='post_detail')
+        # url(r'^(?P<slug>[-\w]+)/$', views.PostView.as_view(), name='post_detail')
 ]
 

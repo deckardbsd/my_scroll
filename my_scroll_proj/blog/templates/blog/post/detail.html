@@ -6,8 +6,31 @@
 <div class='container-fluid'>
 
     <h1>{{ post.title }}</h1>
-    <p class="font-italic">Published {{ post.published }} by {{ post.author.get_full_name }}</p>
+    <h4 class="font-italic">Published {{ post.published }} by {{ post.author.get_full_name }}</h4>
     {{ post.body|linebreaks }}
+
+    <hr />
+
+    {% with comments.count as total_comments %}
+    <h5>{{ total_comments }} comment{{ total_comments|pluralize }}</h5>
+    {% endwith %}
+
+    <div id="comments">
+        {% for comment in comments %}
+            <p class="text-left lead"> {{ comment.body }} </p>
+            <p class="text-left"><small> Commented by {{ comment.name }} at {{ comment.created }}</small></p>
+        {% empty %}
+            <p> There are no comments </p>
+        {% endfor %}
+    </div>
+
+    <div id="create-comment">
+        <form method="post">
+            {{ form.as_p }}
+            {% csrf_token %}
+            <input class="btn btn-primary" type="submit" value="Comment"/>
+        </form>
+    </div>
 
 </div>
 
