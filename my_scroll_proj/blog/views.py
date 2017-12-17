@@ -11,17 +11,16 @@ from .forms import PostForm, CommentForm
 
 class IndexView(generic.ListView):
     model = Post
+    queryset = Post.objects.filter(status='published')
     template_name = 'blog/post/list.html'
     context_object_name = 'posts'
     paginate_by = 3
-
 
 
 class PostDetailView(FormMixin, generic.DetailView):
     template_name = 'blog/post/detail.html'
     form_class = CommentForm
     model = Post
-    queryset = Post.objects.filter(status='published')
 
     def get_success_url(self):
         return reverse('blog:post_detail', kwargs={'slug': self.object.slug})
